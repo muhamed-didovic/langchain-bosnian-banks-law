@@ -8,28 +8,14 @@ import { RunnablePassthrough, RunnableSequence } from "langchain/schema/runnable
 import { createClient } from "@supabase/supabase-js";
 import { OpenAIEmbeddings } from "langchain/embeddings/openai";
 import { SupabaseVectorStore } from "langchain/vectorstores/supabase";
+// import TelegramBot from "node-telegram-bot-api";
 
 
 const convHistory = []
 export function Prompt(props) {
-	// console.log('process.env', process.env);
-	
-	// const retriever = async () => {
-	//
-	//
-	// 	const embeddings = new OpenAIEmbeddings({ openAIApiKey })
-	// 	const client = createClient(sbUrl, sbApiKey)
-	//
-	// 	const vectorStore = new SupabaseVectorStore(embeddings, {
-	// 		client,
-	// 		tableName: 'banks',
-	// 		queryName: 'match_banks'
-	// 	})
-	//
-	// 	const retriever = vectorStore.asRetriever()
-	//
-	// 	return retriever;
-	// }
+	// const botToken = process.env.NEXT_PUBLIC_TELEGRAM_BOT_TOKEN; // Replace with your Telegram bot token
+	// const chatId = process.env.NEXT_PUBLIC_TELEGRAM_CHAT_ID; // Replace with your chat ID
+	// const bot = new TelegramBot(botToken, { polling: false });
 	
 	
 	const handleSubmit = async (event) => {
@@ -64,11 +50,6 @@ export function Prompt(props) {
 			const {response} = await r.json()
 			console.log('r:', response);
 			
-			
-			
-			
-			
-			
 			/*const response = await chain.invoke({
 				question: question,
 				conv_history: formatConvHistory(convHistory)
@@ -83,7 +64,11 @@ export function Prompt(props) {
 			newAiSpeechBubble.textContent = response
 			chatbotConversation.scrollTop = chatbotConversation.scrollHeight
 			
-			
+// 			const reponseForTelegram = `Pitanje: ${ question }
+// Odgovor: ${ response }`
+// 			await bot.sendMessage(chatId, reponseForTelegram);
+		
+		
 		} catch (error) {
 			console.log('eeee', error);
 			// setErrorMessage(
@@ -96,33 +81,6 @@ export function Prompt(props) {
 			// setLoading(false);
 		}
 	};
-	
-	const progressConversation = async () => {
-		const userInput = document.getElementById('user-input')
-		const chatbotConversation = document.getElementById('chatbot-conversation-container')
-		const question = userInput.value
-		userInput.value = ''
-		
-		// add human message
-		const newHumanSpeechBubble = document.createElement('div')
-		newHumanSpeechBubble.classList.add('speech', 'speech-human')
-		chatbotConversation.appendChild(newHumanSpeechBubble)
-		newHumanSpeechBubble.textContent = question
-		chatbotConversation.scrollTop = chatbotConversation.scrollHeight
-		/*const response = await chain.invoke({
-			question: question,
-			conv_history: formatConvHistory(convHistory)
-		})*/
-		convHistory.push(question)
-		convHistory.push(response)
-		
-		// add AI message
-		const newAiSpeechBubble = document.createElement('div')
-		newAiSpeechBubble.classList.add('speech', 'speech-ai')
-		chatbotConversation.appendChild(newAiSpeechBubble)
-		newAiSpeechBubble.textContent = response
-		chatbotConversation.scrollTop = chatbotConversation.scrollHeight
-	}
 	
 	return (
 		<form id="form" className="chatbot-input-container" onSubmit={handleSubmit}>

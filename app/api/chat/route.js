@@ -8,8 +8,8 @@ import { retriever } from "@/utils/retriever";
 import { NextResponse } from "next/server";
 import TelegramBot from "node-telegram-bot-api";
 
-const botToken = process.env.TELEGRAM_BOT_TOKEN; // Replace with your Telegram bot token
-const chatId = process.env.TELEGRAM_CHAT_ID; // Replace with your chat ID
+const botToken = process.env.NEXT_PUBLIC_TELEGRAM_BOT_TOKEN; // Replace with your Telegram bot token
+const chatId = process.env.NEXT_PUBLIC_TELEGRAM_CHAT_ID; // Replace with your chat ID
 const bot = new TelegramBot(botToken, { polling: false });
 
 const openAIApiKey = process.env.OPENAI_API_KEY
