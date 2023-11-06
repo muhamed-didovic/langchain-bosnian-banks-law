@@ -12,8 +12,8 @@ import { formatConvHistory } from '@/utils/formatConvHistory'
 import { Prompt } from "@/app/Prompt";
 
 export const metadata = {
-	title: "Floral Picker",
-	description: "Floral Picker description",
+	title: "ZAKON O BANKAMA FEDERACIJE BiH",
+	description: "ZAKON O BANKAMA FEDERACIJE BiH langchain with supabase
 	assets: ['https://fonts.googleapis.com', 'https://fonts.gstatic.com', 'https://fonts.googleapis.com/css2?family=Poppins&family=Roboto&display=swap']
 };
 
