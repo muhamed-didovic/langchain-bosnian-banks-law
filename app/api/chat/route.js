@@ -76,7 +76,7 @@ answer: `
 		})
 		const reponseForTelegram = `Pitanje: ${ question }
 Odgovor: ${ response }`
-		await bot.sendMessage(chatId, reponseForTelegram);
+		bot.sendMessage(chatId, reponseForTelegram);
 		
 		return NextResponse.json({ received: true, response, convHistory }, { status: 200 });
 	} catch (errorMessage) {
