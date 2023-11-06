@@ -12,6 +12,7 @@
     "@supabase/supabase-js": "^2.38.4",
     "langchain": "^0.0.180",
     "next": "14.0.1",
+    "node-telegram-bot-api": "^0.64.0",
     "pdf-parse": "^1.1.1",
     "react": "^18",
     "react-dom": "^18"

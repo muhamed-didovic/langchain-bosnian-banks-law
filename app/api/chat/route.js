@@ -6,17 +6,22 @@ import { combineDocuments } from "@/utils/combineDocuments";
 import { formatConvHistory } from "@/utils/formatConvHistory";
 import { retriever } from "@/utils/retriever";
 import { NextResponse } from "next/server";
+import TelegramBot from "node-telegram-bot-api";
+
+const botToken = process.env.TELEGRAM_BOT_TOKEN; // Replace with your Telegram bot token
+const chatId = process.env.TELEGRAM_CHAT_ID; // Replace with your chat ID
+const bot = new TelegramBot(botToken, { polling: false });
+
+const openAIApiKey = process.env.OPENAI_API_KEY
+const sbApiKey = process.env.NEXT_PUBLIC_SUPABASE_API_KEY
+const sbUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
 
 export async function POST(req, res) {
 	
 	try {
 		const body = await req.json();
 		console.log('body', body);
-		const {question, convHistory} = body;
-		
-		const openAIApiKey = process.env.OPENAI_API_KEY
-		const sbApiKey = process.env.NEXT_PUBLIC_SUPABASE_API_KEY
-		const sbUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
+		const { question, convHistory } = body;
 		
 		const standaloneQuestionTemplate = `Given some conversation history (if any) and a question, convert the question to a standalone question.
 conversation history: {conv_history}
@@ -69,6 +74,9 @@ answer: `
 			question: question,
 			conv_history: formatConvHistory(convHistory)
 		})
+		const reponseForTelegram = `Pitanje: ${ question }
+Odgovor: ${ response }`
+		await bot.sendMessage(chatId, reponseForTelegram);
 		
 		return NextResponse.json({ received: true, response, convHistory }, { status: 200 });
 	} catch (errorMessage) {
