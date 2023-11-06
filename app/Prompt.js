@@ -1,15 +1,13 @@
 "use client";
 
 import Image from "next/image";
-import { ChatOpenAI } from "langchain/chat_models/openai";
-import { PromptTemplate } from "langchain/prompts";
-import { StringOutputParser } from "langchain/schema/output_parser";
-import { RunnablePassthrough, RunnableSequence } from "langchain/schema/runnable";
-import { createClient } from "@supabase/supabase-js";
-import { OpenAIEmbeddings } from "langchain/embeddings/openai";
-import { SupabaseVectorStore } from "langchain/vectorstores/supabase";
-// import TelegramBot from "node-telegram-bot-api";
-
+// import { ChatOpenAI } from "langchain/chat_models/openai";
+// import { PromptTemplate } from "langchain/prompts";
+// import { StringOutputParser } from "langchain/schema/output_parser";
+// import { RunnablePassthrough, RunnableSequence } from "langchain/schema/runnable";
+// import { createClient } from "@supabase/supabase-js";
+// import { OpenAIEmbeddings } from "langchain/embeddings/openai";
+// import { SupabaseVectorStore } from "langchain/vectorstores/supabase";
 
 const convHistory = []
 export function Prompt(props) {
